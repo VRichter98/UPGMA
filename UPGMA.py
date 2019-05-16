@@ -50,7 +50,19 @@ print(Distance)
 
 print(Distance["SeqD", "SeqA"])
 
-print(min(Distance, key=Distance.get))
+
+
+
+def upgma(Distance):
+    lowest_value = min(Distance.values())
+    Path_length = lowest_value/2
+    return Path_length
+    newDist = Distance.pop()
+
+
+
+
+
 
 
 
