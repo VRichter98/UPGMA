@@ -37,12 +37,20 @@ def read_fasta(filename):
 fasta_filename = 'sequence.fasta'
 all_sequences = read_fasta(fasta_filename)
 
+Distance = {}
+
 for annotation, sequence in all_sequences.items():
     for annotation2, sequence2 in all_sequences.items():
         if annotation != annotation2:
-            print(annotation, "vs", annotation2, ':',sequence, "vs", sequence2, ":", hammingDistance(sequence, sequence2))
-        
+            #print(annotation, "vs", annotation2, ':',sequence, "vs", sequence2, ":", hammingDistance(sequence, sequence2))
+            Distance[annotation, annotation2] = hammingDistance(sequence, sequence2)
 
+print(Distance)
+
+
+print(Distance["SeqD", "SeqA"])
+
+print(min(Distance, key=Distance.get))
 
 
 
