@@ -38,25 +38,66 @@ fasta_filename = 'sequence.fasta'
 all_sequences = read_fasta(fasta_filename)
 
 Distance = {}
+#Distance2 = {}
 
 for annotation, sequence in all_sequences.items():
-    for annotation2, sequence2 in all_sequences.items():
-        if annotation != annotation2:
-            #print(annotation, "vs", annotation2, ':',sequence, "vs", sequence2, ":", hammingDistance(sequence, sequence2))
-            Distance[annotation, annotation2] = hammingDistance(sequence, sequence2)
+       for annotation2, sequence2 in all_sequences.items():
+            if annotation != annotation2:
+                #print(annotation, "vs", annotation2, ':',sequence, "vs", sequence2, ":", hammingDistance(sequence, sequence2))
+                Distance[annotation, annotation2] = hammingDistance(sequence, sequence2)
+                #Distance2[annotation2, annotation] = hammingDistance(sequence, sequence2)
+
+
 
 print(Distance)
+
+
 
 
 print(Distance["SeqD", "SeqA"])
 
 
+min_key = min(Distance, key=Distance.get)
+print(min_key)
+
+min_value = min(Distance.values())
+print(min_value)
+
+#newDist = Distance.pop(min_key)
+#print(Distance)
+
+
+
+
+def replace_value(old_key, new_value):
+    for key in Distance.keys():
+        if key == old_key:
+            Distance[key] = new_value
+        return Distance
+
+
+replace_value(min(Distance, key=Distance.get), '')
+print(Distance)
+
+distance_UPGMA = {}
+lowest_value = min(Distance.values())
+distance_UPGMA[min(Distance, key=Distance.get)] = lowest_value
+
+print(distance_UPGMA)
 
 
 def upgma(Distance):
+    distance_UPGMA = {}
     lowest_value = min(Distance.values())
-    Path_length = lowest_value/2
+    distance_UPGMA[min(Distance, key=Distance.get)] = lowest_value
+    Path_length = lowest_value / 2
     return Path_length
+
+    new = Distance.pop
+
+    #lowest_Sequences = min(Distance, key=Distance.get)
+    #replace_value(lowest_Sequences, "--")
+
     newDist = Distance.pop()
 
 
