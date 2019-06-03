@@ -1,9 +1,6 @@
 
 
 
-seq1 = "AAAGGGTTT"
-
-seq2 = "AAAGGTTTT"
 
 def hammingDistance(seq1, seq2):
     distance = 0
@@ -38,67 +35,41 @@ fasta_filename = 'sequence.fasta'
 all_sequences = read_fasta(fasta_filename)
 
 Distance = {}
-#Distance2 = {}
 
 for annotation, sequence in all_sequences.items():
        for annotation2, sequence2 in all_sequences.items():
             if annotation != annotation2:
-                #print(annotation, "vs", annotation2, ':',sequence, "vs", sequence2, ":", hammingDistance(sequence, sequence2))
                 Distance[annotation, annotation2] = hammingDistance(sequence, sequence2)
-                #Distance2[annotation2, annotation] = hammingDistance(sequence, sequence2)
+
 
 
 
 print(Distance)
 
+temp = []
+dictlist = []
 
+def convert_dict_to_list():
+    for key, value in Distance.items():
+        temp = [key, value]
+        dictlist.append(temp)
 
+    for i in range(len(dictlist)):
+        dictlist2 = []
+        dictlist2 = list(dictlist[i][0])
+        dictlist[i][0] = dictlist2
+    return dictlist
+convert_dict_to_list()
 
-print(Distance["SeqD", "SeqA"])
+print(dictlist)
 
+pair_1 = set(dictlist[0][0])
+pair_2 = set(dictlist[3][0])
+pair_3 = set(dictlist[1][0])
 
-min_key = min(Distance, key=Distance.get)
-print(min_key)
+pair_ges = pair_1 | pair_2 | pair_3
+print(pair_ges)
 
-min_value = min(Distance.values())
-print(min_value)
-
-#newDist = Distance.pop(min_key)
-#print(Distance)
-
-
-
-
-def replace_value(old_key, new_value):
-    for key in Distance.keys():
-        if key == old_key:
-            Distance[key] = new_value
-        return Distance
-
-
-replace_value(min(Distance, key=Distance.get), '')
-print(Distance)
-
-distance_UPGMA = {}
-lowest_value = min(Distance.values())
-distance_UPGMA[min(Distance, key=Distance.get)] = lowest_value
-
-print(distance_UPGMA)
-
-
-def upgma(Distance):
-    distance_UPGMA = {}
-    lowest_value = min(Distance.values())
-    distance_UPGMA[min(Distance, key=Distance.get)] = lowest_value
-    Path_length = lowest_value / 2
-    return Path_length
-
-    new = Distance.pop
-
-    #lowest_Sequences = min(Distance, key=Distance.get)
-    #replace_value(lowest_Sequences, "--")
-
-    newDist = Distance.pop()
 
 
 
