@@ -10,6 +10,7 @@ def hammingDistance(seq1, seq2):
     return distance
 
 
+
 def read_fasta(filename):
     """
     Read sequences from FASTA file into dictionary, ignoring chain information.
@@ -17,6 +18,7 @@ def read_fasta(filename):
     :return: dictionary with annotations as key
     """
     fasta_file = open(filename)
+
     sequences = {}                         # Initialize empty dictionary
     for line in fasta_file:
         line = line.replace("\r","").replace("\n","")
@@ -31,60 +33,110 @@ def read_fasta(filename):
     return sequences
 
 
+
+
+
 fasta_filename = 'sequence.fasta'
 all_sequences = read_fasta(fasta_filename)
+sequence_names = list(all_sequences.keys())
+new_sequence_names = []
 
-Distance = {}
 
-def dict_Distance():
+def Pairwise_Hamming(all_sequences):
+    """
+    Calculate distances by Hamming distances of sequences
+    :param all_sequences:
+    :return: distance dictionary
+    """
+    Distance = {}
     for seq in all_sequences:
         for seq1 in all_sequences:
             if seq == seq1:
                 pass
             else:
-                if (seq1, seq) in Distance:
-                    pass
-                else:
-                    Distance[seq, seq1] = hammingDistance(all_sequences[seq], all_sequences[seq1])
+                Distance[seq, seq1] = hammingDistance(all_sequences[seq], all_sequences[seq1])
     return Distance
-dict_Distance()
+
+Distance = Pairwise_Hamming(all_sequences)
 print(Distance)
 
-temp = []
-dictlist = []
 
-def convert_dict_to_list():
-    for key, value in Distance.items():
-        temp = [key, value]
-        dictlist.append(temp)
 
-    for i in range(len(dictlist)):
-        dictlist2 = []
-        dictlist2 = list(dictlist[i][0])
-        dictlist[i][0] = dictlist2
-    return dictlist
-convert_dict_to_list()
-
-print(dictlist)
-
-pair_1 = set(dictlist[0][0])
-pair_2 = set(dictlist[3][0])
-pair_3 = set(dictlist[1][0])
-
-pair_ges = pair_1 | pair_2 | pair_3
-print(pair_ges)
+min_pair_distance = min(Distance, key=Distance.get)
+min_distance = Distance[min_pair_distance]
 
 
 
+"""def PairwiseMean(Distance, new_sequence_names):
+    while len(Distance)>0:
+        min_pair_distance = min(Distance, key=Distance.get)
+        min_distance = Distance[min_pair_distance]
+        new_Distance = {}
+        Newick = {}
+        for seq in Distance:
+            Newick[min_pair_distance] = min_distance
+        for seq in Distance:
+            for seq1 in Distance:
+                if seq and seq1 is not min_pair_distance:
+                    new_Distance = Distance
+                if seq or seq1 == Distance:
+"""
+
+
+    # 1. Kleinestes Paar
+    # 2. Neuer Buchstabe
+    # 3. neue Distanzen
+#    new_distances = PairwiseMean(Distance, new_sequence_names)
+   # Distances = new_Distance
 
 
 
+#print(Newickformat(Distance))
 
 
 
+replacingvalues = ['Alpha','Beta','Gamma']
 
 
+def upgma(Distance, sequence_names):
+    results = []
+    while len(Distance) > 0:
+        new_sequence_names = []
+        new_Distance = {}
+        min_pair = min(Distance, key=Distance.get)
+        min_distance = Distance[min(Distance, key=Distance.get)]
+        #print(min_pair, min_distance)
+        #print('----')
 
+        for annotation in sequence_names:
+            if annotation != min_pair[0] and annotation != min_pair[1]:
+                new_sequence_names.append(annotation)
+        new_seq_name = replacingvalues.pop()
+        #print(new_seq_name)
+        new_sequence_names.append(new_seq_name)
+        for seq1 in new_sequence_names:
+            for seq2 in new_sequence_names:
+                if seq1 == seq2:
+                    pass
+                elif (seq1,seq2) in Distance:
+                    new_Distance[seq1,seq2] = Distance[seq1,seq2]
+                else:
+                    if seq1 in sequence_names:
+                        new_Distance[seq1,seq2] = (Distance[seq1, min_pair[0]] + Distance[seq1, min_pair[1]])/2
+                    else:
+                        new_Distance[seq1, seq2] = (Distance[min_pair[0], seq2] + Distance[min_pair[1], seq2]) / 2
+        results.append((min_pair[1],min_pair[0],new_seq_name,min_distance/2))
+        Distance = new_Distance
+        sequence_names = new_sequence_names
+        #print(Distance)
+        #print(sequence_names)
+    return results
+print(upgma(Distance, sequence_names))
 
+#UPGMA = upgma(Distance, sequence_names)
 
+#print(UPGMA.remove([-1][2]))
+
+#def Newickformat(results):
+    #while len(results) < 0:
 
