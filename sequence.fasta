@@ -1,8 +1,12 @@
 >seqA
 ATTGCC
 >seqB
-ATTCCG
+ATTGCG
 >seqC
-AATCCG
+ATTGGG
 >seqD
-ATTCCC
+ATCGGC
+>seqE
+AAGGTT
+>seqF
+GGCCTT

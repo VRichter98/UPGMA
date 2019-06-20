@@ -36,7 +36,7 @@ def read_fasta(filename):
 
 
 
-fasta_filename = 'sequence.fasta'
+fasta_filename = input('Name of your Fasta file = ')   #'sequence.fasta'
 all_sequences = read_fasta(fasta_filename)
 sequence_names = list(all_sequences.keys())
 new_sequence_names = []
@@ -58,42 +58,6 @@ def Pairwise_Hamming(all_sequences):
     return Distance
 
 Distance = Pairwise_Hamming(all_sequences)
-print(Distance)
-
-
-
-min_pair_distance = min(Distance, key=Distance.get)
-min_distance = Distance[min_pair_distance]
-
-
-
-"""def PairwiseMean(Distance, new_sequence_names):
-    while len(Distance)>0:
-        min_pair_distance = min(Distance, key=Distance.get)
-        min_distance = Distance[min_pair_distance]
-        new_Distance = {}
-        Newick = {}
-        for seq in Distance:
-            Newick[min_pair_distance] = min_distance
-        for seq in Distance:
-            for seq1 in Distance:
-                if seq and seq1 is not min_pair_distance:
-                    new_Distance = Distance
-                if seq or seq1 == Distance:
-"""
-
-
-    # 1. Kleinestes Paar
-    # 2. Neuer Buchstabe
-    # 3. neue Distanzen
-#    new_distances = PairwiseMean(Distance, new_sequence_names)
-   # Distances = new_Distance
-
-
-
-#print(Newickformat(Distance))
-
-
 
 replacingvalues = ['Omega','Psi','Chi', 'Phi', 'Ypsilon', 'Tau', 'Sigma', 'Rho', 'Pi','Omikron', 'Xi', 'Ny', 'My', 'Lambda', 'Kappa', 'Iota', 'Theta', 'Eta', 'Zeta', 'Epsilon', 'Delta', 'Gamma', 'Beta', 'Alpha']
 
@@ -105,14 +69,11 @@ def upgma(Distance, sequence_names):
         new_Distance = {}
         min_pair = min(Distance, key=Distance.get)
         min_distance = Distance[min(Distance, key=Distance.get)]
-        #print(min_pair, min_distance)
-        #print('----')
 
         for annotation in sequence_names:
             if annotation != min_pair[0] and annotation != min_pair[1]:
                 new_sequence_names.append(annotation)
         new_seq_name = replacingvalues.pop()
-        #print(new_seq_name)
         new_sequence_names.append(new_seq_name)
         for seq1 in new_sequence_names:
             for seq2 in new_sequence_names:
@@ -128,46 +89,21 @@ def upgma(Distance, sequence_names):
         results.append([min_pair[1],min_pair[0],new_seq_name,min_distance/2])
         Distance = new_Distance
         sequence_names = new_sequence_names
-        #print(Distance)
-        #print(sequence_names)
-    return results
-#print(upgma(Distance, sequence_names))
 
+    return results
 
 UPGMA = upgma(Distance, sequence_names)
 
 
-print(UPGMA)
 
-Warwick = UPGMA[-1][2]
+def upgma_to_string(UPGMA):
+    Newick = UPGMA[-1][2]
+    while len(UPGMA)>0:
+        last = UPGMA.pop()
+        substring = '(' + last[0] + ':' + str(last[3]) + ',' + last[1] + ':' + str(last[3]) + ')'
+        Newick = Newick.replace(last[2], substring)
 
-while len(UPGMA)>0:
-    last = UPGMA.pop()
-    #substring = '(' + last[0] + ',' + last[1] + ',' + str(last[3]) + ')'
-    substring = '(' + last[0] + ':' + str(last[3]) + ',' + last[1] + ':' + str(last[3]) + ')'
-    print(last[2])
-    print(substring)
-    Warwick = Warwick.replace(last[2], substring)
-    print(Warwick)
+    return Newick
 
-"""
-def Newickformat(UPGMA):
-    del UPGMA[-1][2]
-    Newick = []
-    #Newick = UPGMA[-1][0]":"UPGMA[-1][-1],
-    while len(UPGMA) < 0:
-        Newick.append(UPGMA[-1])
-
-        for i in replacingvalues:
-            if i == UPGMA[-1][0] and i == UPGMA[-1][1]:
-
-
-    return  UPGMA
-
-print(Newickformat(UPGMA))
-"""
-        
-
-
-
+print(upgma_to_string(UPGMA))
 
