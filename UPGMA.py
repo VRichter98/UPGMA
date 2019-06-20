@@ -95,7 +95,7 @@ min_distance = Distance[min_pair_distance]
 
 
 
-replacingvalues = ['Alpha','Beta','Gamma']
+replacingvalues = ['Omega','Psi','Chi', 'Phi', 'Ypsilon', 'Tau', 'Sigma', 'Rho', 'Pi','Omikron', 'Xi', 'Ny', 'My', 'Lambda', 'Kappa', 'Iota', 'Theta', 'Eta', 'Zeta', 'Epsilon', 'Delta', 'Gamma', 'Beta', 'Alpha']
 
 
 def upgma(Distance, sequence_names):
@@ -125,18 +125,49 @@ def upgma(Distance, sequence_names):
                         new_Distance[seq1,seq2] = (Distance[seq1, min_pair[0]] + Distance[seq1, min_pair[1]])/2
                     else:
                         new_Distance[seq1, seq2] = (Distance[min_pair[0], seq2] + Distance[min_pair[1], seq2]) / 2
-        results.append((min_pair[1],min_pair[0],new_seq_name,min_distance/2))
+        results.append([min_pair[1],min_pair[0],new_seq_name,min_distance/2])
         Distance = new_Distance
         sequence_names = new_sequence_names
         #print(Distance)
         #print(sequence_names)
     return results
-print(upgma(Distance, sequence_names))
+#print(upgma(Distance, sequence_names))
 
-#UPGMA = upgma(Distance, sequence_names)
 
-#print(UPGMA.remove([-1][2]))
+UPGMA = upgma(Distance, sequence_names)
 
-#def Newickformat(results):
-    #while len(results) < 0:
+
+print(UPGMA)
+
+Warwick = UPGMA[-1][2]
+
+while len(UPGMA)>0:
+    last = UPGMA.pop()
+    #substring = '(' + last[0] + ',' + last[1] + ',' + str(last[3]) + ')'
+    substring = '(' + last[0] + ':' + str(last[3]) + ',' + last[1] + ':' + str(last[3]) + ')'
+    print(last[2])
+    print(substring)
+    Warwick = Warwick.replace(last[2], substring)
+    print(Warwick)
+
+"""
+def Newickformat(UPGMA):
+    del UPGMA[-1][2]
+    Newick = []
+    #Newick = UPGMA[-1][0]":"UPGMA[-1][-1],
+    while len(UPGMA) < 0:
+        Newick.append(UPGMA[-1])
+
+        for i in replacingvalues:
+            if i == UPGMA[-1][0] and i == UPGMA[-1][1]:
+
+
+    return  UPGMA
+
+print(Newickformat(UPGMA))
+"""
+        
+
+
+
 
