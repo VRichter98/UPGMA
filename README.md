@@ -1,7 +1,7 @@
 # **UPGMA**
 
-Das Programm erstellt aus Sequenzen im Fasta-Format das Newickformat. Die Abstände werden mithilfe der Hammingabstände berechnet.
-The Program calculates from sequences in the fastafile Format the newick format. The Distances of the tree are calculated by [Hamming Distance](https://en.wikipedia.org/wiki/Hamming_distance)
+
+This implementation calculates from sequences in the fastafile Format the newick format. The Distances of the tree are calculated by [Hamming Distance](https://en.wikipedia.org/wiki/Hamming_distance)
 
 **How to use:**
 
