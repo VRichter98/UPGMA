@@ -5,7 +5,7 @@ This implementation calculates sequences in fastafile format into the newick for
 
 **How to use:**
 
-Before running the program you have to save the sequences of interest as a fastafile. You can find an example of such a fastafile format  [here](http://www.cbs.dtu.dk/services/NetGene2/fasta.php) or by looking at the [sequence.fasta] file.
+Before running the program you have to save the sequences of interest as a fastafile. You can find an example of such a fastafile format  [here](http://www.cbs.dtu.dk/services/NetGene2/fasta.php) or by looking at the [sequence.fasta](https://github.com/VRichter98/UPGMA/blob/master/sequence.fasta) file.
 
 If you start running the program, it will ask you for the name of the fastafile. Please, insert this name as follows: _sequence.fasta_
 
