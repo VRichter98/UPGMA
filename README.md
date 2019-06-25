@@ -6,7 +6,7 @@ This implementation calculates sequences in fastafile format into the newick for
 ## How to use:
 
 ### Prerequisite
-*Python 3
+- Python 3
 
 ### Installation
 - Make new diretory
@@ -27,7 +27,7 @@ For help use this command:
 python3 UPGMA.py -h
 ```
 
-###Output
+### Output
 The output is in newick format. Now it is possible to copy the output and paste it in the field for newick format on this website: [Newick Treeviewer](http://etetoolkit.org/treeview/)
 
 Finally press the button : _View tree!_ and and the tree gets visual.
