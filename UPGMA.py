@@ -1,5 +1,9 @@
+import argparse
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-input", "--file", required=True, help="please place the name of your fastafilename here")
 
+a = parser.parse_args()
 
 
 def hammingDistance(seq1, seq2):
@@ -36,7 +40,7 @@ def read_fasta(filename):
 
 
 
-fasta_filename = input('Name of your Fasta file = ')   #'sequence.fasta'
+fasta_filename = a.file  #'sequence.fasta'
 all_sequences = read_fasta(fasta_filename)
 sequence_names = list(all_sequences.keys())
 new_sequence_names = []
