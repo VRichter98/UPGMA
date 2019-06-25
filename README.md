@@ -30,4 +30,9 @@ python3 UPGMA.py -h
 ### Output
 The output is in newick format. Now it is possible to copy the output and paste it in the field for newick format on this website: [Newick Treeviewer](http://etetoolkit.org/treeview/)
 
+Example of newick format:
+```bash
+((((seqD:0.5,seqA:0.5):0.75,seqE:0.75):1.375,(seqC:0.5,seqB:0.5):1.375):3.0,seqF:3.0)
+```
+
 Finally press the button : _View tree!_ and and the tree gets visual.
