@@ -11,7 +11,7 @@ This implementation calculates sequences in fastafile format into the newick for
 ### Installation
 - Make new diretory
 - Download and save UPGMA.py in your new directory
-- Download and save your sequences of interest as a fasta file [example fasta file](http://www.cbs.dtu.dk/services/NetGene2/fasta.php)
+- Download and save your sequences of interest as a fasta file. [Here is an example for fasta file](http://www.cbs.dtu.dk/services/NetGene2/fasta.php)
 - Make sure that the fasta file is also in your new directory
 
 ### Input
