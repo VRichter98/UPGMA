@@ -12,18 +12,15 @@ def hammingDistance(seq1, seq2):
     :param seq2: sequence 2
     :return: distance between two sequences
     """
-    sequence_list = list(all_sequences.values())        # Initialize list of all sequences
-    longest_sequence = len(max(sequence_list, key=len)) # Get the length of longest sequence
-
-    while len(seq1) < longest_sequence:                 # Fill up the other sequences till all sequences have the same length
-        seq1 += "-"
-    while len(seq2) < longest_sequence:
-        seq2 += "-"
-    distance = 0                                        # Set Distance to 0
-    for i in range(len(seq1)):                          # Check for each base in the sequences if the same base is in identical locations
-        if seq1[i] != seq2[i]:
-            distance += 1                               # If not then add +1 to distance
-    return distance
+    if len(seq1) != len(seq2):
+        print("The sequences have not have the same length")
+        pass
+    else:
+        distance = 0                                        # Set Distance to 0
+        for i in range(len(seq1)):                          # Check for each base in the sequences if the same base is in identical locations
+            if seq1[i] != seq2[i]:
+                distance += 1                               # If not then add +1 to distance
+        return distance
 
 def read_fasta(filename):
     """
