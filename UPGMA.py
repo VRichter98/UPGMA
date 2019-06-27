@@ -86,7 +86,7 @@ def upgma(Distance, sequence_names):
         for annotation in sequence_names:
             if annotation != min_pair[0] and annotation != min_pair[1]:
                 new_sequence_names.append(annotation)                       # Append all annotation pairs to new list that are not match with the min_pair
-        new_seq_name = replacingvalues.pop()                                # If Word from list of nodes (replacingvalues) is used, pop it
+        new_seq_name = replacingvalues.pop()                                # Last word from List is name of new node
         new_sequence_names.append(new_seq_name)                             # Replace the min_pair annotation with last value from replacingvalue list in new list
         for seq1 in new_sequence_names:
             for seq2 in new_sequence_names:
